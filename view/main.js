@@ -10,12 +10,22 @@ module.exports = (s) => {
     // })
     
     s.addMethod("main.translate",async({srcList})=>{
-        if(srcList.length==0){
+        if(!srcList||srcList.length==0){
             return []
         }
         const res=await translateText(srcList)
         return res.map(o=>{
             return o.translatedText
         })
+    })
+
+    s.addMethod("main.lookupDic",async({word})=>{
+        const res=(await (await fetch("https://api.dictionaryapi.dev/api/v2/entries/en/"+word)).json())
+        for(const item of res){
+            if(item.word==word){
+                return item
+            }
+        }
+        return null
     })
 }
