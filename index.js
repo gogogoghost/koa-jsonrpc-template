@@ -5,6 +5,7 @@ const views = require('./views')
 const rpc = require('./views-jsonrpc')
 const logger = require('koa-logger')
 
+process.env['GOOGLE_APPLICATION_CREDENTIALS']='./credentials/stone-airfoil-394515-238b7bfaad71.json'
 
 const app = new Koa();
 const router = new Router()
